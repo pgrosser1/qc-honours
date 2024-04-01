@@ -1,0 +1,211 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{placeins}
+\usepackage[title]{appendix}
+\usepackage{float}
+\usepackage{comment}
+\usepackage{multicol}
+\setlength\columnsep{10pt}
+\usepackage{soul}
+\usepackage{gensymb}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{physics}
+\usepackage{color}
+
+\usepackage{fancyhdr}
+\usepackage{currfile}
+\usepackage[us,12hr]{datetime}
+\fancypagestyle{plain}{
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}}
+
+\usepackage[margin=0.6in]{geometry}
+
+\title{Modelling Ion Motion in an Oscillating Potential with Micromotion}
+
+\begin{document}
+
+\maketitle
+
+In this document, we will derive the Hill's Equation that governs the classical motion of $n$ trapped ions in an oscillating potential. This derivation closely follows Appendix D in Alex Ratcliffe's PhD thesis.
+
+\section{General Hill's Equation}
+To start, we consider the Lagrangian for some time-dependent potential, $V (\tau, x_1 ( \tau), x_2 (\tau), ... , x_n (\tau) )$, in non-dimensionalised time $\tau$:
+\begin{equation}
+\mathcal{L}= \frac{1}{2} \sum_{i = 1}^n x_i'(\tau) - V (\tau, x_1 ( \tau), x_2 (\tau), ... , x_n (\tau) )
+\label{eq:lagrangian}
+\end{equation}
+Here, the $\frac{1}{2} x_i ' (\tau)^2$ terms come from the kinetic energy of each ion (which must be summed over all $n$ ions for the total Lagrangian). Now taking a Taylor expansion of the potential about some time-dependent position $\underline{\boldsymbol{\tilde{X}}} (\tau) = \{ \tilde{x}_n (\tau) \}$, the Lagrangian becomes:
+\begin{equation}
+\mathcal{L}=\frac{1}{2} \sum_{i = 1}^n x_i'(\tau)^2 - V (\tau, \underline{\boldsymbol{\tilde{X}}} ) - \sum_{i = 1}^n \frac{\partial V}{\partial x_i} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} (x_i (\tau) - \tilde{x}_i (\tau)) - \frac{1}{2} \sum_{i = 1}^n \sum_{j = 1}^n \frac{\partial^2 V}{\partial x_i \partial x_j} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} (x_i (\tau) - \tilde{x}_i (\tau)) (x_j (\tau) - \tilde{x}_j (\tau))
+\label{eq:Lagrangian}
+\end{equation}
+We can now generate the equations of motion for the ions using the Euler-Lagrange equations, given for each ion respectively as:
+\begin{equation}
+\frac{d}{d \tau} \left( \frac{\partial \mathcal{L}}{\partial x_i ' (\tau)} \right) = \frac{\partial \mathcal{L}}{\partial x_i (\tau)}	
+\label{eq:eulerlagrange}
+\end{equation}
+Referring to the Lagrangian in \eqref{eq:Lagrangian}, we may extract the following derivatives:
+\begin{align*}
+	\frac{\partial \mathcal{L}}{\partial x_i ' (\tau)} & = x_i' (\tau) \\
+	\frac{\partial \mathcal{L}}{\partial x_i (\tau)} & = - \frac{\partial V}{\partial x_i} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} \frac{\partial}{\partial x_i} \biggl[ (x_i (\tau) - \tilde{x}_i (\tau)) \biggr] - \frac{1}{2} \sum_{i = 1}^n \sum_{j = 1}^n \frac{\partial^2 V}{\partial x_i \partial x_j} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} \frac{\partial}{\partial x_i} \biggl[ (x_i (\tau) - \tilde{x}_i (\tau)) (x_j (\tau) - \tilde{x}_j (\tau)) \biggr] - ... \\
+	& = - \frac{\partial V}{\partial x_i} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} - \frac{1}{2} \sum_{j = 1}^n \frac{\partial^2 V}{\partial x_i \partial x_j} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} \frac{\partial}{\partial x_i} \biggl[ x_i (\tau) x_j (\tau) - x_i (\tau) \tilde{x}_j (\tau) - \tilde{x}_i (\tau) x_j (\tau) + \tilde{x}_i (\tau) \tilde{x}_j (\tau) \biggr] - ... \\
+	& = - \frac{\partial V}{\partial x_i} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} - \frac{1}{2} \sum_{j = 1}^n \frac{\partial^2 V}{\partial x_i \partial x_j} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} (1 + \delta_{ij})  x_j (\tau) - \tilde{x}_j (\tau) - \delta_{ij} \tilde{x}_j (\tau) - ... \\
+	& = - \frac{\partial V}{\partial x_i} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} - \frac{1}{2} \sum_{j = 1}^n \frac{\partial^2 V}{\partial x_i \partial x_j} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} (1 + \delta_{ij}) (x_j (\tau) - \tilde{x}_j (\tau)) - ...
+\end{align*}
+By using the Euler-Lagrange equations in \eqref{eq:eulerlagrange} as well as the derivatives above, the following equations of motion (expressed as a set of coupled ODE's) can be derived:
+\begin{gather}
+x_i '' (\tau) = - \frac{\partial V}{\partial x_i} \Biggr|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} - \frac{1}{2}\sum_{j = 1}^n (1 + \delta_{ij}) \frac{\partial^2 V}{\partial x_i \partial x_j} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)}	 (x_j (\tau) - \tilde{x}_j (\tau)) - ...
+\end{gather}
+Now, we are ultimately interested in deviations in the motion from $\underline{\boldsymbol{\tilde{X}}} (\tau)$, and an according change of variables to a displacement coordinate $\xi_i (\tau) = x_i (\tau) - \tilde{x}_i (\tau)$ generates the following differential equation:
+\begin{equation}
+\xi_i''(\tau)  + \tilde{x}_i''(\tau) = 	- \frac{\partial V}{\partial x_i} \Biggr|_{\underline{\boldsymbol{\tilde{X}}} (\tau)} - \frac{1}{2}\sum_{j = 1}^n (1 + \delta_{ij}) \frac{\partial^2 V}{\partial x_i \partial x_j} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)}	 \xi_j (\tau) - ...
+\label{eq:EOM}
+\end{equation}
+A judicious choice of $\underline{\boldsymbol{\tilde{X}}} (\tau)$ can simplify the above equation. If we choose $\underline{\boldsymbol{\tilde{X}}} (\tau)$ such that:
+\begin{equation}
+	\tilde{x}_i''(\tau) = - \frac{\partial V}{\partial x_i} \Biggr|_{\underline{\boldsymbol{\tilde{X}}} (\tau)},
+	\label{eq:xtilde}
+\end{equation}
+then \eqref{eq:EOM} will become:
+\begin{equation}
+	\xi_i''(\tau) = - \frac{1}{2}\sum_{j = 1}^n (1 + \delta_{ij}) \frac{\partial^2 V}{\partial x_i \partial x_j} \Biggl|_{\underline{\boldsymbol{\tilde{X}}} (\tau)}	 \xi_j (\tau) - ...
+	\label{eq:simpleEOM}
+\end{equation}
+In particular, we choose $\underline{\boldsymbol{\tilde{X}}} (\tau)$ as the \textit{inhomogeneous} (or "particular") solution to the equation of motion in \eqref{eq:xtilde}. Note that the equation of motion in \eqref{eq:xtilde} represents the original motional problem that we are interested in solving $x (\tau)$ for in the first place, but this time via $F = ma$ (and $F = - \nabla V$). This means that the solution to $\tilde{x} (\tau)$ is exactly the motion that the ions will undergo in the oscillating potential. Recall that because \eqref{eq:xtilde} is an inhomogeneous second-order differential equation, the general solution will take the form:
+\begin{equation}
+\tilde{x} (\tau) = c_1 \tilde{x}_1 (\tau) + c_2 \tilde{x}_2 (\tau) + \tilde{x}_p (\tau)	 ,
+\end{equation}
+where $\tilde{x}_1 (\tau)$ and $\tilde{x}_2 (\tau)$ are the two general solutions to the homogeneous differential equation, and $c_1$ and $c_2$ are free parameters that may be chosen to satisfy initial conditions. $\tilde{x}_p (\tau)$ is a particular solution to the inhomogeneous differential equation. Now, setting $c_1 = c_2 = 0$ leaves us with only the intrinsic component of the solution for $\tilde{x} (\tau)$, which is the minimum amount of motion that is possible in the system (ie. the lowest energy solution). That is, $\tilde{x} (\tau) = \tilde{x}_p (\tau)$ (the inhomogeneous solution) can be interpreted as a quasi-equilibrium "position." By numerically solving \eqref{eq:xtilde}, we know that this underlying micromotion is high-frequency and approximately periodic around some set positions, which are the secular equilibrium positions that are generated when only the effective harmonic potential is considered. \par
+\medskip
+\noindent We will now proceed with the equation of motion in \eqref{eq:simpleEOM}. Writing this in matrix-vector notation $ \underline{\boldsymbol{\Xi}}'' (\tau) = \{ \xi_1, ..., \xi_n \} $ in terms of the Hessian $\bf{H}$ of \textit{V} at the point $\underline{\boldsymbol{\tilde{X}}} (\tau)$ and dropping higher-order terms generates the following differential equation:
+\begin{equation}
+	\underline{\boldsymbol{\Xi}}'' (\tau) = - \bf{H} (\tau) |_{\underline{\boldsymbol{\tilde{X}}} (\tau)} \underline{\boldsymbol{\Xi}} (\tau)
+	\label{eq:coupledODE}
+\end{equation}
+We can now choose to move into a new set of coordinates $\underline{\boldsymbol{\Upsilon}} = \{ v_i \}$ that diagonalises the Hessian. More specifically, the transformation is given by:
+\begin{equation}
+	\underline{\boldsymbol{\Upsilon}} (\tau) = \textbf{O} \underline{\boldsymbol{\Xi}} (\tau) : \textbf{O}^{-1} \textbf{H} (\tau) \textbf{O} = diag(\lambda_i (\tau))
+	\label{eq:transformation}
+\end{equation}
+By virtue of diagonalising the Hessian, the $\{ v_i \}$ coordinates are defined as the linear combinations of $\{ \xi_i \}$ that constitute the modes of the system, and their value indicates the coefficients of the mode occupations. For example, if the system was entirely in one mode of a two-mode system, then one case of the coordinates would be $\underline{\boldsymbol{\Upsilon}} = \{ v_1, v_2 \} = \{ 1, 0 \}$, where $v_1 = \frac{1}{\sqrt{2}}(\xi_1 + \xi_2)$ and $v_2 = \frac{1}{\sqrt{2}}(\xi_1 - \xi_2)$. \par
+\medskip
+\noindent What is critical is that the transformation $\textbf{O}$ is \textit{independent} of $\tau$ under the condition that $\textbf{H} (\tau)$ is circulant (which is satisfied for the purposes of this discussion). Because there is no time-dependence in the diagonalisation, there is no time-dependence in the linear combinations of $\xi_1$, $\xi_2$, $\xi_3$ etc. that compose each mode. Thus, despite a time-dependent potential and time-dependent "equilibrium positions," static modes are generated when we consider the displacement of the ions around the minimum micromotion $\tilde{x} (\tau)$. This can be somewhat expected from the fact that all of the ions are in the same phase-locked driving (that is, they are not being driven apart and together periodically), which would lead to static eigenvectors in the mode constructions. It is the time-independence of $\textbf{O}$ that is necessary for the decoupling of \eqref{eq:coupledODE}.
+ \par
+\medskip
+\noindent Once uncoupled, the resulting equations of motion will be in terms of a set of time-dependent eigenvalues $\{ \lambda_i \}$:
+\begin{equation}
+v_i '' (\tau) = - \lambda_i (\tau) v_i (\tau)	
+\label{eq:uncoupledODE}
+\end{equation}
+This can equivalently be expressed in matrix form as:
+\begin{equation}
+	\underline{\boldsymbol{\Upsilon}}'' (\tau) = - \boldsymbol{\Lambda} (\tau) \underline{\boldsymbol{\Upsilon}} (\tau)
+\end{equation}
+where $\boldsymbol{\Lambda} (\tau)$ is the time-dependent matrix given by $\boldsymbol{\Lambda} (\tau) = diag(\lambda_i (\tau))$. Now, because the original potential $V (\tau)$ is periodic, the Hessian $\textbf{H} (\tau)$ and therefore the eigenvalues $\lambda_i (\tau)$ will possess the same periodicity. This means that we can decompose the $\lambda_i (\tau)$ eigenvalues into their Fourier components as:
+\begin{align}
+a_{i, 0} & = \frac{\omega}{2 \pi} \int_0^{\frac{2 \pi}{\omega}} \lambda_i (\tau) \; d \tau \label{eq:firstcomp} \\
+a_{i, n} & = \frac{\omega}{2 \pi} \int_0^{\frac{2 \pi}{\omega}} \lambda_i (\tau) \cos (n \omega \tau) \; d \tau \label{eq:secondcomp} \\
+b_{i, n} & = \frac{\omega}{2 \pi} \int_0^{\frac{2 \pi}{\omega}} \lambda_i (\tau) \sin (n \omega \tau) \; d \tau
+\end{align}
+Using these Fourier expansions, the uncoupled equations of motion in \eqref{eq:uncoupledODE} can equivalently be expressed as:
+\begin{equation}
+v_i '' (\tau) = - \left( a_{i, 0} + \sum_{n = 1}^{\infty} a_{i, n} \cos (n \omega \tau) + \sum_{n = 1}^{\infty} b_{i, n} \sin (n \omega \tau) \right)	v_i (\tau)
+\label{eq:uncoupledEOM}
+\end{equation}
+Thus, we see that each of the uncoupled equations of motion will result in a Hill's equation governing each of the secular modes. Floquet's theorem then tells us that the solution to $v_i (\tau)$ will be an exponential function multiplied by a periodic function with the same periodicity as $\lambda_i (\tau)$. \par
+\medskip
+
+\section{Mathieu's Equation for two ions in a linear Paul trap}
+From here, we will change notation from $v_i$ to $v_p$ above to reflect the fact that the $ \{ v_p \}$ coordinates refer to the displacement of the $p$-th mode, rather than the $i$-th ion. We will now derive the specific form of the Hill's Equation for the linear Paul trap, for the case of two and three ions in the trap. \par
+\medskip
+\noindent First consider two ions. The full potential for two ions in a linear Paul trap is given by:
+\begin{equation}
+	V_P = \frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{\sqrt{(x_1 - x_2)^2 + (z_1 - z_2)^2}}  + \frac{1}{2} \frac{m \omega_{RF}^2}{4} [ a_z (z_1^2 + z_2^2) + (a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) ) (x_1^2 + x_2^2) ]
+\end{equation}
+We will determine the form of the Hessian first in the $x$-dimension, which is the axis along which ions will be kicked. The components of the Hessian are given by:
+\begin{equation}
+H_{ij} = \frac{1}{2} (1 + \delta_{ij}) \frac{\partial^2 V}{\partial x_i \partial x_j } \Biggr|_{\tilde{x} (t)}
+\end{equation}
+Here, $\tilde{x} (t)$ are the inhomogeneous solutions to the original differential equation (ie. the time-dependent, quasi-equilibrium positions), as discussed above. For linear Paul traps, the trap oscillates solely in the direction transverse to the longitudinal (ie. $z$) axis, and the ions themselves are aligned along this longitudinal axis. Importantly, micromotion will only occur in axis that exhibits dynamic trap behaviour, so we don't expect the oscillatory nature of the trap to affect the equilibrium positions along the longitudinal axis. That is, we expect these ``quasi"-equilibrium positions on the $z$-axis to be the same as the equilibrium positions in the secular, non-micromotion case. However, because the trap is oscillating \textit{in} the transverse direction \textit{around} the longitudinal axis, the longitudinal axis actually becomes a stationary point of the trap. Hence, the inhomogeneous solution to the original differential equation will not only be time-independent, but they will occur at $\tilde{x}_i (t) = 0$ for all ions. Hence, the Hessian for two ions will take the form:
+\begin{align}
+H & = \begin{bmatrix} -\frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{(z_1 - z_2)^3} + \frac{1}{4} m \omega_{RF}^2 \left( a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) & \frac{1}{2} \frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{(z_1 - z_2)^3} \\ \frac{1}{2} \frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{(z_1 - z_2)^3} & -\frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{(z_1 - z_2)^3} + \frac{1}{4} m \omega_{RF}^2 \left(a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) \end{bmatrix} \\
+& = \frac{1}{4} m \omega_{RF}^2 \left( a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} +  \frac{q^2}{4 \pi \epsilon_0} \begin{bmatrix} - \frac{1}{(z_1 - z_2)^3} & \frac{1}{2} \frac{1}{(z_1 - z_2)^3} \\ \frac{1}{2} \frac{1}{(z_1 - z_2)^3} & - \frac{1}{(z_1 - z_2)^3} \end{bmatrix}
+\end{align}
+The eigenvalues of the first matrix are clearly $\frac{1}{4} m \omega_{RF}^2 \left(a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right)$. If we let $z_1 - z_2 = 2 z_0$ via symmetry of the secular equilibrium positions, then the eigenvalues of the second matrix can be easily found as: $\lambda_1 = -  \frac{q^2}{4 \pi \epsilon_0} \frac{1/16}{z_0^3}$ and $\lambda_2 = -  \frac{q^2}{4 \pi \epsilon_0} \frac{3/16}{z_0^3}$. Hence, the eigenvalues in total can be determined as:
+\begin{align}
+\lambda_1 & = \frac{1}{4} m \omega_{RF}^2 \left( a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) -  \frac{q^2}{4 \pi \epsilon_0} \frac{1/16}{z_0^3} \\
+\lambda_2 & = \frac{1}{4} m \omega_{RF}^2 \left( a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta})\right) -  \frac{q^2}{4 \pi \epsilon_0} \frac{3/16}{z_0^3}
+\end{align}
+With these, we may determine the form of the Hill's Equation in \eqref{eq:uncoupledEOM}. We will denote the general eigenvalue for the $p$-th mode as:
+\begin{equation}
+\lambda_p = \frac{1}{4} m \omega_{RF}^2 \left(a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) - \frac{q^2}{4 \pi \epsilon_0} \frac{\kappa_p}{z_0^3}
+\end{equation}
+Now, in the special case of the linear Paul trap, we can simply insert this eigenvalue into \eqref{eq:uncoupledODE}. Without any approximations needing to be made, we can generate the Hill's Equation exactly:
+\begin{equation*}
+v_p'' (\tau) = - \left( \frac{1}{4} m \omega_{RF}^2 \left(a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) - \frac{q^2}{4 \pi \epsilon_0} \frac{\kappa_p}{z_0^3} \right) v_p (\tau)
+\end{equation*}
+The time has been implicitly non-dimensionalised via $\tau = \frac{\beta \omega_{RF}}{4 \pi} t$, which has introduced a factor of $\left( \frac{4 \pi}{\beta \omega_{RF}} \right)^2$ on the right-hand side that has not yet been accounted for. Furthermore, the Lagrangian (in \eqref{eq:lagrangian}) has been divided by $m$ for simplicity since the start, so we must also account for that here. By using these, the above equation of motion becomes:
+\begin{align*}
+	v_p'' (\tau) & = - \frac{(2 \pi)^2}{\beta^2} \left(a_x - \frac{q^2}{\pi \epsilon_0  m \omega_{RF}^2} \frac{\kappa_p}{z_0^3} - 2 q_x \cos(\frac{4 \pi \tau}{\beta})  \right) v_p (\tau) \\
+	& = - \frac{(2 \pi)^2}{\beta^2} \left(a_x - \frac{\eta \kappa_p}{z_0^3} - 2 q_x \cos( \frac{4 \pi \tau}{\beta} ) \right) v_p (\tau) \\
+\end{align*}
+where $\eta = \frac{q^2}{\pi \epsilon_0  m \omega_{RF}^2}$. This is the Hill's Equation for two ions in a linear Paul trap, which can be exactly expressed in the form of \eqref{eq:uncoupledEOM} without needing to compute the Fourier decomposition of the eigenvalues (in any case, doing so would simply generate the above equation). For more than two ions, the Fourier decomposition of the eigenvalues would need to be used. Continuing on with the equation above, if we assign the following parameter:
+\begin{equation}
+a_p = a_x - \frac{\eta \kappa_p}{\bar{z_0}^3}	
+\end{equation}
+then the equation above simplifies to :
+\begin{equation}
+v_p '' (\tau) = - \frac{(2 \pi)^2}{\beta^2} \left( a_p - 2 q \cos \left( \frac{4 \pi \tau}{\beta} \right) \right)	 v_p (\tau)
+\end{equation}
+This is the now in the form of a Mathieu Equation, and solving it will allow the ion trajectories to be elucidated. \par
+\medskip
+\noindent As an extension, we can generalise our results for the $n$-ion case. The difference between the two-ion case and the $n$-ion case is that, in the $n$-ion case, the Hill's Equation will need to be truncated at the first-order Fourier component in order to generate the Mathieu Equation (whereas the Mathieu Equation is exact for two ions). This is shown below. \par
+\medskip
+\noindent The linear Paul trap for $n$ ions takes the form:
+\begin{equation}
+	V_P = \sum_{i = 1}^{n - 1} \sum_{j = i + 1}^{n} \frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{\sqrt{(x_j - x_i)^2 + (z_j - z_i)^2}}  + \frac{1}{2} \frac{m \omega_{RF}^2}{4} \sum_{i = 1}^n [ a_z z_i^2 + (a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) ) x_i^2 ]
+	\label{eq:yolo}
+\end{equation}
+In an analogous way to the two-ion case, we would expect that the eigenvalues of the corresponding Hessian matrix to $V_P$ would take the form:
+\begin{equation}
+	\lambda_p = \frac{1}{4} m \omega_{RF}^2 \left(a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) - \Gamma_p
+\end{equation}
+where $\Gamma_p$ is some term that is generated from the Coulomb component of \eqref{eq:yolo}, and in general will be very complex to analytically solve for. Now, to generate the Mathieu Equation, we will determine the zeroeth-order Fourier component, $a_{p,0}$ (given in \eqref{eq:firstcomp}), as well as the first-order Fourier term (given in \eqref{eq:secondcomp} for $n = 1$). All of terms in the Hill's Equation will be neglected. Note that there is no need to keep any $\sin$ terms, as the time-dependent potential exhibits only a $\cos$ term (and hence the Fourier decomposition can be done entirely in terms of $\cos$ functions).\par
+\medskip
+\noindent The zeroeth-order Fourier component, $a_{p,0}$, can be found as:
+\begin{align*}
+a_{p,0} & = \frac{2}{\beta} \int_0^{\frac{\beta}{2}} \lambda_p (\tau) \; d \tau \\
+& =  \frac{2}{\beta} \int_0^{\frac{\beta}{2}} \frac{1}{4} m \omega_{RF}^2 \left(a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) - \Gamma_p \; d \tau \\
+& = \frac{1}{4} m \omega_{RF}^2 \left( a_x - \Gamma_p' \right) 
+\end{align*}
+where $\frac{\beta}{2}$ is the non-dimensionalised trap period (with $\tau = \frac{\beta \omega}{4 \pi} t$), and $\Gamma_p' = \frac{\Gamma_p}{\left( \frac{1}{4} m \omega_{RF}^2 \right)}$. The first-order Fourier term (given in \eqref{eq:secondcomp} for $n = 1$) can be found as:
+\begin{align*}
+a_{p,1} & = \frac{2}{\beta} \int_0^{\frac{\beta}{2}} \lambda_p (\tau) \cos(\frac{4 \pi \tau}{\beta}) \; d \tau \\
+& =  \frac{2}{\beta} \int_0^{\frac{\beta}{2}} \left[ \frac{1}{4} m \omega_{RF}^2 \left(a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) - \Gamma_p \right] \cos(\frac{4 \pi \tau}{\beta}) \; d \tau \\
+& = - \frac{1}{4} m \omega_{RF}^2 q_x 
+\end{align*}
+Thus, by accounting for the non-dimensional factors in the same way as previously, the Mathieu Equation for the $p$-th mode in a two-ion linear Paul trap will be given by: % This next step is not entirely correct! There isn't a 2 in front of the q_x term, based on the above
+\begin{equation}
+	v_p '' (\tau) = - \frac{(2 \pi)^2}{\beta^2} \left( \left( a_x - \Gamma_p' \right) - 2 q_x \cos (\frac{4 \pi \tau}{\beta}) \right)	v_p (\tau)
+\end{equation}
+If we assign the following parameter:
+\begin{equation}
+a_p = a_x - \Gamma_p'
+\end{equation}
+then the Mathieu Equation simplifies to:
+\begin{equation}
+v_p '' (\tau) = - \frac{(2 \pi)^2}{\beta^2} \left( a_p - 2 q \cos \left( \frac{4 \pi \tau}{\beta} \right) \right)	 v_p (\tau)
+\end{equation}
+as in the case for two ions. 
+\end{document}
