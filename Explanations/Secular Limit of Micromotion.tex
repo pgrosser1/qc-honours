@@ -113,21 +113,24 @@ Rearranging these for $\frac{C_2}{C_0}$ and equating them, we achieve:
 \begin{equation}
 \frac{1}{D_2 - \frac{1}{D_4 - \frac{1}{\dots}}}	= D_0 - \frac{1}{D_{-2} - \frac{1}{D_{-4} - \frac{1}{\dots}}}
 \end{equation}
-$D_0 = \frac{a_p - \beta^2}{q_x}$ 
- 
-
-
-
-
-
-A continued fraction expression can also be generated for $\beta^2$:
+As $D_0 = \frac{a_p - \beta^2}{q_x}$, this can be easily rearranged for $\beta^2$:
 \begin{equation}
-\beta^2 = a_p - q_x \left( \frac{1}{D_0 - \frac{1}{D_2 - \frac{1}{...}}} + \frac{1}{D_0 - \frac{1}{D_{-2} - \frac{1}{...}}} \right) \label{eq:beta}
+\beta^2 = a_p - q_x \left( \frac{1}{D_2 - \frac{1}{D_4 - \frac{1}{\dots}}} + \frac{1}{D_{-2} - \frac{1}{D_{-4} - \frac{1}{\dots}}} \right) \label{eq:beta}
 \end{equation}
-We will consider the conditions necessary to reach the secular limit of the ion motion in \eqref{eq:motion} -- that is, the micromotion can be reasonably neglected. It is important to note that approximately secular motion cannot be achieved by simply setting $\omega_{RF} \rightarrow \infty$, as such a limit would cause the oscillatory component of the trap to do less and less in comparison to the static component. Earnshaw's theorem dictates that a static potential is unable to trap a charged ion, so $\omega_{RF} \rightarrow \infty$ would accordingly be unable confine the ion and no secular motion would be achievable. Rather, the secular limit can be achieved when the micromotion terms in \eqref{eq:motion} are not time-dependent, ie. the only non-zero micromotion coefficient is $C_0$ and all other terms for $n \neq 0$ vanish. In that case, the non-time-dependent terms can be absorbed into the constants $A$ and $B$. \par
+Numerical values for $\beta$ can be extracted by numerically solving \eqref{eq:beta} once it has been truncated at a pre-specified value for $n$, then using this to solve for the $C_{2n}$ coefficients up to that order iteratively. \par
 \medskip
-\noindent Via \eqref{eq:Cterms1} and \eqref{eq:Cterms2}, we achieve rapidly-vanishing $C_{2n}$ terms with increasing $n$ when the $D_{2n}$ terms also diverge rapidly with increasing $n$. In \eqref{eq:phoebe}, we see that the $D_{2n}$ terms will diverge quickly with $|n| \ge 1$ as long as $q_x$ and $a_p$ are both small. This indicates that for any given $\omega_{\text{sec}}$, our condition to achieve the approximately secular motion will involve small $q_x$ and $a_p$ values.
-
-% Talk about the lowest-order approximation in section 2 from the paper! 
+\noindent We will consider the conditions necessary to reach the secular limit of the ion motion in \eqref{eq:motion} -- that is, the micromotion can be reasonably neglected. It is important to note that approximately secular motion cannot be achieved by simply setting $\omega_{RF} \rightarrow \infty$, as such a limit would cause the oscillatory component of the trap to do less and less in comparison to the static component. Earnshaw's theorem dictates that a static potential is unable to trap a charged ion, so $\omega_{RF} \rightarrow \infty$ would accordingly be unable confine the ion and no secular motion would be achievable. Rather, the secular limit can be achieved when the micromotion terms in \eqref{eq:motion} are not time-dependent, ie. the only non-zero micromotion coefficient is $C_0$ and all other terms for $n \neq 0$ vanish. In that case, the non-time-dependent terms can be absorbed into the constants $A$ and $B$. \par
+\medskip
+\noindent Via \eqref{eq:CF1} and \eqref{eq:CF2}, we achieve rapidly-vanishing $C_{2n}$ terms with increasing $n$ when the $D_{2n}$ terms also diverge rapidly with increasing $n$. Via the definition of the $D_{2n}$ terms, we see that the $D_{2n}$ terms will diverge quickly with $|n| \ge 1$ as long as $q_x$ and $a_p$ are both small. This indicates that for any given $\omega_{\text{sec}}$, our condition to achieve the approximately secular motion will involve small $q_x$ and $a_p$ values. \par
+\medskip
+\noindent In the lowest-order case for the ion trajectory ($a_p$, $q_x^2 \ll 1$), it is reasonable to assume that $C_{\pm 4} \approx 0$. This leads to the following approximation for $\beta$:
+\begin{equation}
+\beta \approx \sqrt{a_p + \frac{1}{2}q_x^2}	
+\end{equation}
+If we choose two small $a_p, q_x$ values in the stability region for $\beta$ -- say, $a = 0.001$, $q = 0.001$ -- and keep orders of $n$ up to $n = 1$ (corresponding to $C_{\pm 4} \approx 0$), then $\beta$ can be numerically solved as $\beta = 0.0316307$. This agrees with the approximation, which produces:
+\begin{equation*}
+\beta \approx \sqrt{0.001 + \frac{1}{2}(0.001)^2} = 0.0316307
+\end{equation*}
+Importantly, keeping terms of up to $n = 2$ and $n = 3$ also produces the same value of $\beta$, indicating that the assumption $C_{\pm 4} \approx 0$ is appropriate here. 
 
 \end{document}
