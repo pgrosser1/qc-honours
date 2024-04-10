@@ -41,45 +41,47 @@
 v_p''(\tau) = - \frac{(2 \pi)^2}{\beta^2} \left( a_p - 2 q_x \cos \left( \frac{4 \pi \tau}{\beta} \right) \right) v_p (\tau)	
 \label{eq:mathieu}
 \end{equation}
-If we make the substitution $\xi = \frac{2 \pi \tau}{\beta}$ (which is equivalent to $\xi = \frac{\omega_{RF}}{2} t$, as $\tau = \frac{\beta \omega_{RF}}{4 \pi} t$), then the Mathieu Equation can be expressed more simply as:
+Note that $\beta$ has not been explicitly defined yet -- it is just a factor involved in the non-dimensionalisation of the time. It is not the same as $\beta_p$, which arises in the solution to the Mathieu Equation below. \par
+\medskip
+\noindent If we make the substitution $\xi = \frac{2 \pi \tau}{\beta}$ (which is equivalent to $\xi = \frac{\omega_{RF}}{2} t$, as $\tau = \frac{\beta \omega_{RF}}{4 \pi} t$), then the Mathieu Equation can be expressed more simply as:
 \begin{equation}
 v_p''(\xi)	= - \left( a_p - 2 q_x \cos \left( 2 \xi \right) \right) v_p (\xi)
 \label{eq:mathieusimple}
 \end{equation}
 The Mathieu Equation is one of many differential equations with periodic coefficients, the stable solutions of which can be found from Floquet theorem:
 \begin{equation}
-	v_p (\xi) = A e^{i \beta \xi} \sum_{n = - \infty}^{\infty} C_{2n} e^{i 2 n \xi} + B e^{- i \beta \xi} \sum_{n = - \infty}^{\infty} C_{2n} e^{- i 2 n \xi}
+	v_p (\xi) = A e^{i \beta_p \xi} \sum_{n = - \infty}^{\infty} C_{2n} e^{i 2 n \xi} + B e^{- i \beta_p \xi} \sum_{n = - \infty}^{\infty} C_{2n} e^{- i 2 n \xi}
 	\label{eq:motion}
 \end{equation}
-The contribution from the oscillating component of the trap is included in the summations -- that is, the summations capture all contributions to the motion from the micromotion. The exponential terms out the front of the summations will determine the secular motion of the ions. 
+where $\beta_p$ is a function of $a_p$ and $q_x$. The contribution from the oscillating component of the trap is included in the summations -- that is, the summations capture all contributions to the motion from the micromotion. The exponential terms out the front of the summations will determine the secular motion of the ions. 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % How was this determined? 
-If $\xi = \frac{\omega_{RF}}{2} t$, then we can see that the dimensional frequency of the secular motion (ie. in units of inverse dimensional time, $1/t$) will be given by:
+If $\xi = \frac{\omega_{RF}}{2} t$, then we can see that the dimensional frequency of the secular motion (ie. in units of inverse dimensional time, $1/t$) for each mode will be given by:
 \begin{equation}
-\omega_{\text{sec}} = \frac{\beta \omega_{RF}}{2} \label{eq:sec}
+\omega_{\text{sec}, p} = \frac{\beta_p \omega_{RF}}{2} \label{eq:sec}
 \end{equation}
 By inserting the motion in \eqref{eq:motion} back into \eqref{eq:mathieusimple}, one can obtain recurrence relations for the coefficients $C_{2n}$. With this substitution, the LHS of \eqref{eq:mathieusimple} becomes:
 \begin{equation*}
-v_p'' (\xi) = - \sum_{n = - \infty}^{\infty} C_{2n} (\beta + 2n)^2 (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} )
+v_p'' (\xi) = - \sum_{n = - \infty}^{\infty} C_{2n} (\beta_p + 2n)^2 (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} )
 \end{equation*}
 Accordingly, the RHS becomes:
 \begin{equation}
-- \left( a_p - 2 q_x \cos \left( 2 \xi \right) \right) v_p (\xi) = - \sum_{n = - \infty}^{\infty} C_{2n} ( a_p - 2 q_x \cos \left( 2 \xi \right) ) (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} )
+- \left( a_p - 2 q_x \cos \left( 2 \xi \right) \right) v_p (\xi) = - \sum_{n = - \infty}^{\infty} C_{2n} ( a_p - 2 q_x \cos \left( 2 \xi \right) ) (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} )
 \end{equation}
 Equating the LHS and the RHS, we achieve: 
 \begin{gather*}
-	- \sum_{n = - \infty}^{\infty} C_{2n} ( a_p - 2 q_x \cos \left( 2 \xi \right) ) (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} ) = - \sum_{n = - \infty}^{\infty} C_{2n} (\beta + 2n)^2 (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} ) \\
-	\implies \sum_{n = - \infty}^{\infty} C_{2n} (a_p - 2 q_x \cos (2 \xi) - (\beta + 2n)^2 ) (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} ) = 0 \\
-	\implies \sum_{n = - \infty}^{\infty} C_{2n} \left( \frac{a_p - (\beta + 2n)^2}{q_x} - (e^{i 2 \xi} + e^{-i 2 \xi} ) \right) (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} ) = 0
+	- \sum_{n = - \infty}^{\infty} C_{2n} ( a_p - 2 q_x \cos \left( 2 \xi \right) ) (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} ) = - \sum_{n = - \infty}^{\infty} C_{2n} (\beta_p + 2n)^2 (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} ) \\
+	\implies \sum_{n = - \infty}^{\infty} C_{2n} (a_p - 2 q_x \cos (2 \xi) - (\beta_p + 2n)^2 ) (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} ) = 0 \\
+	\implies \sum_{n = - \infty}^{\infty} C_{2n} \left( \frac{a_p - (\beta_p + 2n)^2}{q_x} - (e^{i 2 \xi} + e^{-i 2 \xi} ) \right) (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} ) = 0
 \end{gather*}
-where $\cos(2 \xi) = \frac{1}{2} (e^{i 2 \xi} + e^{-i 2 \xi})$ has been used. If we denote $D_{2n} = \frac{a_p - (\beta + 2n)^2}{q_x}$, then this further becomes:
+where $\cos(2 \xi) = \frac{1}{2} (e^{i 2 \xi} + e^{-i 2 \xi})$ has been used. If we denote $D_{2n} = \frac{a_p - (\beta_p + 2n)^2}{q_x}$, then this further becomes:
 \begin{gather*}
-	\sum_{n = - \infty}^{\infty} C_{2n} \left( D_{2n} - e^{i 2 \xi} - e^{-i 2 \xi} \right) (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} ) = 0 \\
-	\implies \sum_{n = - \infty}^{\infty} D_{2n} C_{2n} (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} ) - \sum_{n = - \infty}^{\infty} C_{2n} (A e^{i (\beta + 2n + 2) \xi} + B e^{-i (\beta + 2n + 2) \xi} ) \\ - \sum_{n = - \infty}^{\infty} C_{2n} (A e^{i (\beta + 2n - 2) \xi} + B e^{-i (\beta + 2n - 2) \xi} ) = 0
+	\sum_{n = - \infty}^{\infty} C_{2n} \left( D_{2n} - e^{i 2 \xi} - e^{-i 2 \xi} \right) (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} ) = 0 \\
+	\implies \sum_{n = - \infty}^{\infty} D_{2n} C_{2n} (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} ) - \sum_{n = - \infty}^{\infty} C_{2n} (A e^{i (\beta_p + 2n + 2) \xi} + B e^{-i (\beta_p + 2n + 2) \xi} ) \\ - \sum_{n = - \infty}^{\infty} C_{2n} (A e^{i (\beta_p + 2n - 2) \xi} + B e^{-i (\beta_p + 2n - 2) \xi} ) = 0
 \end{gather*}
 Changing the index in the second sum to $n \rightarrow 2n + 2$ and the index in the third sum to $n \rightarrow 2n - 2$, we achieve:
 \begin{gather*}
-	\sum_{n = - \infty}^{\infty} (D_{2n} C_{2n} - C_{2n - 2} - C_{2n + 2}) (A e^{i (\beta + 2n) \xi} + B e^{-i (\beta + 2n) \xi} ) = 0
+	\sum_{n = - \infty}^{\infty} (D_{2n} C_{2n} - C_{2n - 2} - C_{2n + 2}) (A e^{i (\beta_p + 2n) \xi} + B e^{-i (\beta_p + 2n) \xi} ) = 0
 \end{gather*}
 Every Fourier component must be 0 in order to satisfy this condition, which leads to the following recurrence relation:
 \begin{equation}
@@ -113,24 +115,24 @@ Rearranging these for $\frac{C_2}{C_0}$ and equating them, we achieve:
 \begin{equation}
 \frac{1}{D_2 - \frac{1}{D_4 - \frac{1}{\dots}}}	= D_0 - \frac{1}{D_{-2} - \frac{1}{D_{-4} - \frac{1}{\dots}}}
 \end{equation}
-As $D_0 = \frac{a_p - \beta^2}{q_x}$, this can be easily rearranged for $\beta^2$:
+As $D_0 = \frac{a_p - \beta_p^2}{q_x}$, this can be easily rearranged for $\beta_p^2$:
 \begin{equation}
-\beta^2 = a_p - q_x \left( \frac{1}{D_2 - \frac{1}{D_4 - \frac{1}{\dots}}} + \frac{1}{D_{-2} - \frac{1}{D_{-4} - \frac{1}{\dots}}} \right) \label{eq:beta}
+\beta_p^2 = a_p - q_x \left( \frac{1}{D_2 - \frac{1}{D_4 - \frac{1}{\dots}}} + \frac{1}{D_{-2} - \frac{1}{D_{-4} - \frac{1}{\dots}}} \right) \label{eq:beta}
 \end{equation}
-Numerical values for $\beta$ can be extracted by numerically solving \eqref{eq:beta} once it has been truncated at a pre-specified value for $n$, then using this to solve for the $C_{2n}$ coefficients up to that order iteratively. \par
+Numerical values for $\beta_p$ can be extracted by numerically solving \eqref{eq:beta} once it has been truncated at a pre-specified value for $n$, then using this to solve for the $C_{2n}$ coefficients up to that order iteratively. It is clearly a mode-dependent value (hence the subscript $p$), as it depends on the mode-specific $a_p$. We can now define $\beta$ from the above. $\beta$, the factor involved in the non-dimensionalisation of time, is \textit{chosen} to be one of the $\beta_p$'s -- that is, we non-dimensionalise the time in terms of \textit{one} of the secular mode periods, $\omega_{\text{sec},p}$ (given in \eqref{eq:sec}). We can choose this to be the first mode, and hence $\beta := \beta_1$. \par
 \medskip
 \noindent We will consider the conditions necessary to reach the secular limit of the ion motion in \eqref{eq:motion} -- that is, the micromotion can be reasonably neglected. It is important to note that approximately secular motion cannot be achieved by simply setting $\omega_{RF} \rightarrow \infty$, as such a limit would cause the oscillatory component of the trap to do less and less in comparison to the static component. Earnshaw's theorem dictates that a static potential is unable to trap a charged ion, so $\omega_{RF} \rightarrow \infty$ would accordingly be unable confine the ion and no secular motion would be achievable. Rather, the secular limit can be achieved when the micromotion terms in \eqref{eq:motion} are not time-dependent, ie. the only non-zero micromotion coefficient is $C_0$ and all other terms for $n \neq 0$ vanish. In that case, the non-time-dependent terms can be absorbed into the constants $A$ and $B$. \par
 \medskip
 \noindent Via \eqref{eq:CF1} and \eqref{eq:CF2}, we achieve rapidly-vanishing $C_{2n}$ terms with increasing $n$ when the $D_{2n}$ terms also diverge rapidly with increasing $n$. Via the definition of the $D_{2n}$ terms, we see that the $D_{2n}$ terms will diverge quickly with $|n| \ge 1$ as long as $q_x$ and $a_p$ are both small. This indicates that for any given $\omega_{\text{sec}}$, our condition to achieve the approximately secular motion will involve small $q_x$ and $a_p$ values. \par
 \medskip
-\noindent In the lowest-order case for the ion trajectory ($a_p$, $q_x^2 \ll 1$), it is reasonable to assume that $C_{\pm 4} \approx 0$. This leads to the following approximation for $\beta$:
+\noindent In the lowest-order case for the ion trajectory ($a_p$, $q_x^2 \ll 1$), it is reasonable to assume that $C_{\pm 4} \approx 0$. This leads to the following approximation for $\beta_p$:
 \begin{equation}
-\beta \approx \sqrt{a_p + \frac{1}{2}q_x^2}	
+\beta_p \approx \sqrt{a_p + \frac{1}{2}q_x^2}	
 \end{equation}
-If we choose two small $a_p, q_x$ values in the stability region for $\beta$ -- say, $a = 0.001$, $q = 0.001$ -- and keep orders of $n$ up to $n = 1$ (corresponding to $C_{\pm 4} \approx 0$), then $\beta$ can be numerically solved as $\beta = 0.0316307$. This agrees with the approximation, which produces:
+If we choose two small $a_p, q_x$ values in the stability region for $\beta_p$ -- say, $a = 0.001$, $q = 0.001$ -- and keep orders of $n$ up to $n = 1$ (corresponding to $C_{\pm 4} \approx 0$), then $\beta_p$ can be numerically solved as $\beta_p = 0.0316307$. This agrees with the approximation, which produces:
 \begin{equation*}
-\beta \approx \sqrt{0.001 + \frac{1}{2}(0.001)^2} = 0.0316307
+\beta_p \approx \sqrt{0.001 + \frac{1}{2}(0.001)^2} = 0.0316307
 \end{equation*}
-Importantly, keeping terms of up to $n = 2$ and $n = 3$ also produces the same value of $\beta$, indicating that the assumption $C_{\pm 4} \approx 0$ is appropriate here. 
+Importantly, keeping terms of up to $n = 2$ and $n = 3$ also produces the same value of $\beta_p$, indicating that the assumption $C_{\pm 4} \approx 0$ is appropriate here. 
 
 \end{document}
