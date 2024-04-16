@@ -129,15 +129,29 @@ Thus, we see that each of the uncoupled equations of motion will result in a Hil
 \section{Mathieu's Equation for two ions in a linear Paul trap}
 From here, we will change notation from $v_i$ to $v_p$ above to reflect the fact that the $ \{ v_p \}$ coordinates refer to the displacement of the $p$-th mode, rather than the $i$-th ion. We will now derive the specific form of the Hill's Equation for the linear Paul trap, for the case of two and three ions in the trap. \par
 \medskip
-\noindent First consider two ions. The full potential for two ions in a linear Paul trap is given by:
+\noindent First consider two ions. A general form of an oscillating electromagnetic trap potential is given by:
+\begin{equation}
+\Phi (x, y,z,t) = \frac{U}{2} (\alpha x^2 + \beta y^2 + \gamma z^2) + \frac{\tilde{U}}{2} \cos (\omega_{RF} t) (\alpha ' x^2 + \beta ' y^2 + \gamma ' z^2)	
+\end{equation}
+where the requirement that this potential satisfies the Laplace Equation $\Delta \Phi = 0$ enforces that $\alpha + \beta + \gamma = 0$ and $\alpha' + \beta' + \gamma' = 0$. Particular choices of these parameters will lead to different trap geometries. The linear Paul trap utilises $- (\alpha + \beta) = \gamma$, $\alpha ' = - \beta '$ and $\gamma ' = 0$. This leads to dynamical confinement in the $x-y$ plane and static potential confinement (for positively-charged particles) in the $z$-direction. Equivalently, the linear Paul trap can be expressed (for two ions) as:
 \begin{equation}
 	V_P = \frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{\sqrt{(x_1 - x_2)^2 + (z_1 - z_2)^2}}  + \frac{1}{2} \frac{m \omega_{RF}^2}{4} [ a_z (z_1^2 + z_2^2) + (a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) ) (x_1^2 + x_2^2) ]
 \end{equation}
-We will determine the form of the Hessian first in the $x$-dimension, which is the axis along which ions will be kicked. The components of the Hessian are given by:
+where:
+\begin{equation}
+a_x = \frac{4 Z \abs{e} U \alpha}{m \omega_{RF}^2}, \quad q_x = - \frac{2 Z \abs{e} \tilde{u} \alpha'}{m \omega_{RF}^2}, \quad a_z = \frac{4 Z \abs{e} U \gamma}{m \omega_{RF}^2}	
+\end{equation}
+The $y$-motion is not relevant in the case of linear Paul traps. It is important to note that because the trap oscillates solely in the direction transverse to the longitudinal ($z$) axis (that is, $\gamma' =q_z = 0$), there is no time-dependence along the longitudinal axis (which is the axis along which the ions are aligned). The combination of the oscillating and static trap will create an "effective" harmonic trap along the directions transverse to the longitudinal axis, but the trapping is always the same along the longitudinal axis itself. Specifically, it is given as:
+\begin{equation}
+\Phi_z (z) = \frac{U}{2} \gamma z^2	
+\end{equation}
+Moving on, we will now determine the form of the Hessian first in the $x$-dimension, which is the axis along which ions will be kicked. The components of the Hessian are given by:
 \begin{equation}
 H_{ij} = \frac{1}{2} (1 + \delta_{ij}) \frac{\partial^2 V}{\partial x_i \partial x_j } \Biggr|_{\tilde{x} (t)}
 \end{equation}
-Here, $\tilde{x} (t)$ are the inhomogeneous solutions to the original differential equation (ie. the time-dependent, quasi-equilibrium positions), as discussed above. For linear Paul traps, the trap oscillates solely in the direction transverse to the longitudinal (ie. $z$) axis, and the ions themselves are aligned along this longitudinal axis. Importantly, micromotion will only occur in axis that exhibits dynamic trap behaviour, so we don't expect the oscillatory nature of the trap to affect the equilibrium positions along the longitudinal axis. That is, we expect these ``quasi"-equilibrium positions on the $z$-axis to be the same as the equilibrium positions in the secular, non-micromotion case. However, because the trap is oscillating \textit{in} the transverse direction \textit{around} the longitudinal axis, the longitudinal axis actually becomes a stationary point of the trap. Hence, the inhomogeneous solution to the original differential equation will not only be time-independent, but they will occur at $\tilde{x}_i (t) = 0$ for all ions. Hence, the Hessian for two ions will take the form:
+Here, $\tilde{x} (t)$ are the inhomogeneous solutions to the original differential equation (ie. the time-dependent, quasi-equilibrium positions), as discussed above. \par
+\medskip
+\noindent Micromotion will only occur in axes that exhibit dynamic trap behaviour. Hence, in the case of a linear Paul trap, the oscillatory nature of the trap will not affect the equilibrium positions along the longitudinal axis. That is, we expect these ``quasi"-equilibrium positions on the $z$-axis to be the actual equilibrium positions of $\Phi_z$. Furthermore, because the trap is oscillating \textit{in} the transverse direction \textit{around} the longitudinal axis, the longitudinal ($z$) axis actually becomes a stationary point of the trap. Hence, the inhomogeneous solutions to the original differential equation will not only be time-independent, but they will occur at $\tilde{x}_i (t) = 0$ for all ions. Hence, the Hessian for two ions will take the form:
 \begin{align}
 H & = \begin{bmatrix} -\frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{(z_1 - z_2)^3} + \frac{1}{4} m \omega_{RF}^2 \left( a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) & \frac{1}{2} \frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{(z_1 - z_2)^3} \\ \frac{1}{2} \frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{(z_1 - z_2)^3} & -\frac{\left( \frac{q^2}{4 \pi \epsilon_0} \right)}{(z_1 - z_2)^3} + \frac{1}{4} m \omega_{RF}^2 \left(a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) \end{bmatrix} \\
 & = \frac{1}{4} m \omega_{RF}^2 \left( a_x - 2 q_x \cos(\frac{4 \pi \tau}{\beta}) \right) \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} +  \frac{q^2}{4 \pi \epsilon_0} \begin{bmatrix} - \frac{1}{(z_1 - z_2)^3} & \frac{1}{2} \frac{1}{(z_1 - z_2)^3} \\ \frac{1}{2} \frac{1}{(z_1 - z_2)^3} & - \frac{1}{(z_1 - z_2)^3} \end{bmatrix}

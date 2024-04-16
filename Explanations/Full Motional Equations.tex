@@ -47,12 +47,99 @@ Or, if the substitution $\xi = \frac{2 \pi \tau}{\beta}$ (which is equivalent to
 v_p''(\xi)	= - \left( a_p - 2 q_x \cos \left( 2 \xi \right) \right) v_p (\xi)
 \label{eq:mathieusimple}
 \end{equation}
-The stable solutions of the Mathieu Equation can be found from Floquet's Theorem:
+The stable solutions of the Mathieu Equation can be found from Floquet's Theorem, which states that the Mathieu Equation admits a complex-valued solution of the form:
 \begin{equation}
-	v_p (\xi) = A e^{i \beta_p \xi} \sum_{n = - \infty}^{\infty} C_{2n} e^{i 2 n \xi} + B e^{- i \beta_p \xi} \sum_{n = - \infty}^{\infty} C_{2n} e^{- i 2 n \xi}
+F(a_p ,q_x,\xi) = e^{i \beta_p \xi} P (2 \xi) + e^{-i \beta_p \xi} P(-2 \xi)
+\end{equation}
+Here, $\beta_p$ is some complex number (which we have not yet defined), denoted as the Floquet exponent. $P (2 \xi)$ is a complex-valued function of the same period as the periodic function in our differential equation, which is given in \eqref{eq:mathieusimple} (hence the dependency on $2 \xi$). That is, $P (2 \xi)$ is a periodic function with $\pi$, which allows us to generate a general Fourier series for $P (2 \xi)$:
+\begin{equation}
+P (2 \xi) = \sum_{n = - \infty}^{\infty} C_n e^{i 2 n \xi}	
+\end{equation}
+Ultimately, this gives the stable solutions of the Mathieu Equation as:
+\begin{equation}
+	v_p (\xi) = A e^{i \beta_p \xi} \sum_{n = - \infty}^{\infty} C_{n} e^{i 2 n \xi} + B e^{- i \beta_p \xi} \sum_{n = - \infty}^{\infty} C_{n} e^{- i 2 n \xi}
 	\label{eq:motion}
 \end{equation}
-Note that $\beta_p$ is a mode-specific value that is defined from the recurrence relations, and $\beta$ is chosen as $\beta := \beta_1$ (see 'Secular Limit of Micromotion' document). 
+$\beta_p$, the Floquet exponent, is a mode-specific value that is defined from the recurrence relations, and $\beta$ is chosen as $\beta := \beta_1$ (see 'Secular Limit of Micromotion' document). If we now convert back to the non-dimensionalised time $\tau$ (which is related to $\xi$ via $\xi = \frac{2 \pi}{\beta} \tau$), this becomes:
+\begin{equation}
+	v_p (\tau) = A e^{i 2 \pi \frac{\beta_p}{\beta} \tau} \sum_{n = - \infty}^{\infty} C_{n} e^{i n \frac{4 \pi \tau}{\beta}} + B e^{- i 2 \pi \frac{\beta_p}{\beta} \tau} \sum_{n = - \infty}^{\infty} C_{n} e^{- i n \frac{4 \pi \tau}{\beta}}
+	\label{eq:motion2}
+\end{equation}
+By modifying $A$ and $B$, this can be shifted to:
+\begin{equation}
+	v_p (\tau) = A' e^{i 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0)} \sum_{n = - \infty}^{\infty} C_{n} e^{i n \frac{4 \pi \tau}{\beta}} + B' e^{- i 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0)} \sum_{n = - \infty}^{\infty} C_{n} e^{- i n \frac{4 \pi \tau}{\beta}}
+	\label{eq:motion3}
+\end{equation}
+Its corresponding time derivative is given by:
+\begin{align}
+	v_p' (\tau) & = A' \left( i 2 \pi \frac{\beta_p}{\beta} \right) e^{i 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0)} \sum_{n = - \infty}^{\infty} C_{n} e^{i n \frac{4 \pi \tau}{\beta}} + B' \left( - i 2 \pi \frac{\beta_p}{\beta} \right) e^{i 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0)} \sum_{n = - \infty}^{\infty} C_{n} e^{- i n \frac{4 \pi \tau}{\beta}} \nonumber \\
+	& + A' e^{i 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0)} \sum_{n = - \infty}^{\infty} C_{n} \left(\frac{4 \pi i n}{\beta} \right) e^{i n \frac{4 \pi \tau}{\beta}} + B' e^{- i 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0)} \sum_{n = - \infty}^{\infty} C_{n} \left(- \frac{4 \pi i n}{\beta} \right) e^{-i n \frac{4 \pi \tau}{\beta}} 
+\end{align}
+We can solve for $A'$ and $B'$ by equating the motion to initial conditions. Note that $A'$ and $B'$ will need to be complex coefficients in order for the motion as a whole, $v_p (\tau)$, to be purely real. If we impose the initial condition $v_p (\tau_0) = x_0$, then this generates:
+\begin{align}
+x_0 & = A' \sum_{n = - \infty}^{\infty} C_n e^{i n \frac{4 \pi \tau_0}{\beta}} + B' \sum_{n = -\infty}^{\infty} C_n e^{-i n \frac{4 \pi \tau_0}{\beta}} \\
+& = (A'_r + i A'_i) (f_c (\tau_0) + i f_s (\tau_0)) + (B'_r + i B'_i) (f_c (\tau_0) - i f_s (\tau_0) )
+\end{align}
+where:
+\begin{align}
+f_c (\tau)	& = \sum_{n = - \infty}^{\infty} C_n \cos \left( \frac{4 n \pi \tau}{\beta} \right) \\
+f_s (\tau) & = \sum_{n = - \infty}^{\infty} C_n \sin \left( \frac{4 n \pi \tau}{\beta} \right)
+\end{align}
+If this is explicitly broken up into its real and imaginary parts, we generate:
+\begin{align}
+	x_0 & = (A'_r + B'_r) f_c (\tau_0) + (B'_i - A'_i) f_s (\tau_0) \label{eq:cond1} \\
+	0 & = (A'_i + B'_i) f_c (\tau_0) + (A'_r - B'_r) f_s (\tau_0) \label{eq:cond2}
+\end{align}
+If we also impose the initial condition $v_p' (\tau_0) = v_0$, then this generates:
+\begin{align}
+v_0 & = A' \left( i 2 \pi \frac{\beta_p}{\beta} \right) \sum_{n = - \infty}^{\infty} C_{n} e^{i n \frac{4 \pi \tau_0}{\beta}} + B' \left( - i 2 \pi \frac{\beta_p}{\beta} \right) \sum_{n = - \infty}^{\infty} C_{n} e^{- i n \frac{4 \pi \tau_0}{\beta}} \nonumber \\
+	& + A' \sum_{n = - \infty}^{\infty} C_{n} \left(\frac{4 \pi i n}{\beta} \right) e^{i n \frac{4 \pi \tau_0}{\beta}} + B' \sum_{n = - \infty}^{\infty} C_{n} \left(- \frac{4 \pi i n}{\beta} \right) e^{-i n \frac{4 \pi \tau_0}{\beta}} \\
+	& = (A'_r + i A'_i) \left(2 \pi \frac{\beta_p}{\beta} \right) (i f_c (\tau_0) - f_s (\tau_0)) + (B'_r + i B'_i) \left(2 \pi \frac{\beta_p}{\beta} \right) (- i f_c (\tau_0) - f_s (\tau_0)) \nonumber \\
+	& + (A'_r + i A'_i) (i f_s' (\tau_0) + f_c'(\tau_0)) + (B'_r + i B'_i) (- i f'_s (\tau_0) + f_c' (\tau_0))
+\end{align}
+If this is explicitly broken up into its real and imaginary parts, we generate:
+\begin{align}
+v_0 & = \frac{2 \pi \beta_p}{\beta} [ - (A'_r + B'_r ) f_s(\tau_0) + (B'_i - A'_i) f_c (\tau_0) ] + (A'_r + B'_r) f_c'(\tau_0) + (B'_i - A'_i) f_s'(\tau_0) \label{eq:cond3} \\
+0 & = \frac{2 \pi \beta_p}{\beta} [ - (A'_i + B'_i) f_s(\tau_0) + (A'_r - B'_r) f_c (\tau_0) ] + (A'_i + B'_i) f_c'(\tau_0) + (A'_r - B'_r) f_s'(\tau_0) \label{eq:cond4}
+\end{align}
+Equations \eqref{eq:cond1}, \eqref{eq:cond2}, \eqref{eq:cond3} and \eqref{eq:cond4} now fully define $A'$ and $B'$. The components of $A'$ and $B'$ can accordingly be solved as:
+\begin{align}
+A'_r & = - \frac{1}{2} \frac{f_s (\tau_0) v_0 - x_0 \left( \frac{2 \pi \beta_p}{\beta} f_c (\tau_0) + f_s' (\tau_0) \right)}{f_c (\tau_0) f'_s (\tau_0) - f_c' (\tau_0) f_s (\tau_0) + \frac{2 \pi \beta_p}{\beta} (f_c (\tau_0)^2 + f_s (\tau_0)^2 ) }	\label{eq:Ar} \\
+B'_r & = - \frac{1}{2} \frac{f_s (\tau_0) v_0 - x_0 \left( \frac{2 \pi \beta_p}{\beta} f_c (\tau_0) + f_s' (\tau_0) \right)}{f_c (\tau_0) f'_s (\tau_0) - f_c' (\tau_0) f_s (\tau_0) + \frac{2 \pi \beta_p}{\beta} (f_c (\tau_0)^2 + f_s (\tau_0)^2 ) }	\label{eq:Br} \\
+A'_i & = - \frac{1}{2} \frac{f_c (\tau_0) v_0 - x_0 \left( - \frac{2 \pi \beta_p}{\beta} f_s (\tau_0) + f_c' (\tau_0) \right) }{f_c (\tau_0) f'_s (\tau_0) - f_c' (\tau_0) f_s (\tau_0) + \frac{2 \pi \beta_p}{\beta} (f_c (\tau_0)^2 + f_s (\tau_0)^2 ) } \label{eq:Ai} \\
+B'_i & = \frac{1}{2} \frac{f_c (\tau_0) v_0 - x_0 \left( - \frac{2 \pi \beta_p}{\beta} f_s (\tau_0) + f_c' (\tau_0) \right)}{f_c (\tau_0) f'_s (\tau_0) - f_c' (\tau_0) f_s (\tau_0) + \frac{2 \pi \beta_p}{\beta} (f_c (\tau_0)^2 + f_s (\tau_0)^2 ) } \label{eq:Bi}
+\end{align}
+We can see that $A$ and $B$ are complex conjugates of one another, which ensures that our motion is indeed real. Substituting $A' = A'_r + i A'_i$ and $B' = A'_r - i A'_i$ (for simplicity) into \eqref{eq:motion3}, the motion becomes:
+\begin{equation}
+v_p (\tau) = 2 (A'_r f_c (\tau) - A'_i f_s (\tau)) \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) - 2 (A'_i f_c (\tau) + A'_r f_s (\tau)) \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right)
+\end{equation}
+Accordingly, by substituting the form of $A'_r$ and $A'_i$ from \eqref{eq:Ar} and \eqref{eq:Ai} respectively, we generate the motion:
+\begin{align}
+\begin{split}
+	v_p (\tau) &= \frac{1}{f_c' (\tau_0) f_s (\tau_0) - f_c (\tau_0) f_s' (\tau_0) - \frac{2 \pi \beta_p}{\beta} (f_c (\tau_0)^2 + f_s (\tau_0))} \biggl( \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) \biggl( (f_s (\tau_0) v_0 - f_s' (\tau_0) x_0) f_c (\tau) \\
+	& + (f_c' (\tau_0) x_0 - f_c (\tau_0) v_0) f_s (\tau) - \frac{2 \pi \beta_p}{\beta} x_0 (f_c (\tau_0) f_c (\tau) + f_s (\tau_0) f_s (\tau)) \biggr) + \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) \biggl( f_s (\tau) (f_s' (\tau_0) x_0 \\
+	& - f_s (\tau_0) v_0 + \frac{2 \pi \beta_p}{\beta} f_c (\tau_0) x_0 ) + f_c (\tau) (f_c' (\tau_0) x_0 - f_c (\tau) v_0 - \frac{2 \pi \beta_p}{\beta} x_0 f_s (\tau) ) \biggr) \biggr)
+\end{split}
+\end{align}
+To provide a more convenient form of the motion, we can introduce the following constants:
+\begin{align}
+\sigma_c & = f_c (\tau_0) = \sum_{n = - \infty}^{\infty} C_n \cos \left( \frac{4 n \pi \tau_0}{\beta} \right) \\
+\sigma_s & = f_s (\tau_0) = \sum_{n = - \infty}^{\infty} C_n \sin \left( \frac{4 n \pi \tau_0}{\beta} \right) \\
+\zeta_c & = \frac{\beta}{4 \pi} f'_s (\tau_0) = \sum_{n = - \infty}^{\infty} n C_n \cos \left( \frac{4 n \pi \tau_0}{\beta} \right) \\
+\zeta_s & = - \frac{\beta}{4 \pi} f'_c (\tau_0) = \sum_{n = - \infty}^{\infty} n C_n \sin \left( \frac{4 n \pi \tau_0}{\beta} \right) \\
+\rho & = 4 \pi \left( \sigma_c \left( \sigma_c + \frac{2}{\beta_p} \zeta_c \right) + \sigma_s \left( \sigma_s + \frac{2}{\beta_p} \zeta_s \right) \right)
+\end{align}
+This allows the motion to be written as:
+\begin{align}
+\begin{split}
+v_p (\tau) & = \frac{2 \beta}{\rho \beta_p} v_0 \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) (\sigma_c f_c (\tau - \tau_0) + \sigma_s f_s (\tau - \tau_0)) \\
+&+ \frac{2 \beta}{\rho \beta_p} v_0 \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) (\sigma_c f_s (\tau - \tau_0) - \sigma_s f_c (\tau - \tau_0)) \\
+&+ \frac{2}{\rho \beta_p} 2 \pi x_0 \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) ((\beta_p \sigma_s + 2 \zeta_s) f_c (\tau - \tau_0) - (\beta \sigma_c + 2 \zeta_c) f_s (\tau - \tau_0)) \\
+&+ \frac{2}{\rho \beta_p} 2 \pi x_0 \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) ((\beta_p \sigma_c + 2 \zeta_c) f_c (\tau - \tau_0) + (\beta \sigma_s + 2 \zeta_s) f_s (\tau - \tau_0)) 
+\end{split}
+\end{align}
+
+
 
 
 
