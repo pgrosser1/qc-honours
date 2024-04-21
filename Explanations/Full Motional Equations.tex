@@ -116,7 +116,7 @@ v_p (\tau) = 2 (A'_r f_c (\tau) - A'_i f_s (\tau)) \cos \left( 2 \pi \frac{\beta
 Accordingly, by substituting the form of $A'_r$ and $A'_i$ from \eqref{eq:Ar} and \eqref{eq:Ai} respectively, we generate the motion:
 \begin{align}
 \begin{split}
-	v_p (\tau) &= \frac{1}{f_c' (\tau_0) f_s (\tau_0) - f_c (\tau_0) f_s' (\tau_0) - \frac{2 \pi \beta_p}{\beta} (f_c (\tau_0)^2 + f_s (\tau_0))} \biggl( \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) \biggl( (f_s (\tau_0) v_0 - f_s' (\tau_0) x_0) f_c (\tau) \\
+	v_p (\tau) &= \frac{1}{f_c' (\tau_0) f_s (\tau_0) - f_c (\tau_0) f_s' (\tau_0) - \frac{2 \pi \beta_p}{\beta} (f_c (\tau_0)^2 + f_s (\tau_0)^2)} \biggl( \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) \biggl( (f_s (\tau_0) v_0 - f_s' (\tau_0) x_0) f_c (\tau) \\
 	& + (f_c' (\tau_0) x_0 - f_c (\tau_0) v_0) f_s (\tau) - \frac{2 \pi \beta_p}{\beta} x_0 (f_c (\tau_0) f_c (\tau) + f_s (\tau_0) f_s (\tau)) \biggr) + \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) \biggl( f_s (\tau) (f_s' (\tau_0) x_0 \\
 	& - f_s (\tau_0) v_0 + \frac{2 \pi \beta_p}{\beta} f_c (\tau_0) x_0 ) + f_c (\tau) (f_c' (\tau_0) x_0 - f_c (\tau) v_0 - \frac{2 \pi \beta_p}{\beta} x_0 f_s (\tau) ) \biggr) \biggr)
 \end{split}
@@ -129,16 +129,38 @@ To provide a more convenient form of the motion, we can introduce the following 
 \zeta_s & = - \frac{\beta}{4 \pi} f'_c (\tau_0) = \sum_{n = - \infty}^{\infty} n C_n \sin \left( \frac{4 n \pi \tau_0}{\beta} \right) \\
 \rho & = 4 \pi \left( \sigma_c \left( \sigma_c + \frac{2}{\beta_p} \zeta_c \right) + \sigma_s \left( \sigma_s + \frac{2}{\beta_p} \zeta_s \right) \right)
 \end{align}
-This allows the motion to be written as:
+\noindent This allows the motion to be written as:
 \begin{align}
 \begin{split}
 v_p (\tau) & = \frac{2 \beta}{\rho \beta_p} v_0 \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) (\sigma_c f_c (\tau - \tau_0) + \sigma_s f_s (\tau - \tau_0)) \\
 &+ \frac{2 \beta}{\rho \beta_p} v_0 \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) (\sigma_c f_s (\tau - \tau_0) - \sigma_s f_c (\tau - \tau_0)) \\
 &+ \frac{2}{\rho \beta_p} 2 \pi x_0 \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) ((\beta_p \sigma_s + 2 \zeta_s) f_c (\tau - \tau_0) - (\beta \sigma_c + 2 \zeta_c) f_s (\tau - \tau_0)) \\
 &+ \frac{2}{\rho \beta_p} 2 \pi x_0 \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) ((\beta_p \sigma_c + 2 \zeta_c) f_c (\tau - \tau_0) + (\beta \sigma_s + 2 \zeta_s) f_s (\tau - \tau_0)) 
+\end{split} \label{eq:FULLONMOTION}
+\end{align}
+Now we would like to determine the motion arising from a series of kicks at time $\{ \tau_i \}$, which results in a corresponding change in velocity of $\{ v_i \}$. (Note that this change in velocity is still referring to a change in velocity of a mode, not an ion). To determine the resulting motion, we can use the linearity of the equation of motion to write the solution as a sum of solutions which satisfy the change in velocity as initial conditions. \par
+\medskip
+\noindent First we recall that $v_p$ is defined as the linearised modes of the \textit{displaced} ion positions from equilibrium (not the absolute ion positions). Thus, if we assume that the ions start (at $\tau = \tau_0$) at their equilibrium positions, then the linear combinations of the displaced positions from equilibrium that constitute $v_p$ will also be 0 -- this produces an initial modal displacement of $x_0 = 0$ at $\tau = \tau_0$. \eqref{eq:FULLONMOTION} therefore simplifies to: 
+\begin{align}
+	\begin{split}
+v_p (\tau) & = \frac{2 \beta}{\rho \beta_p} v_0 \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) (\sigma_c f_c (\tau - \tau_0) + \sigma_s f_s (\tau - \tau_0)) \\
+&+ \frac{2 \beta}{\rho \beta_p} v_0 \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_0) \right) (\sigma_c f_s (\tau - \tau_0) - \sigma_s f_c (\tau - \tau_0))
+\end{split} \label{eq:phoebe}
+\end{align}
+\noindent Now, if we consider all the pulses independently of one another, then we would expect that the trajectory after each pulse will also satisfy \eqref{eq:phoebe}, though now with initial velocity $v_i$ at time $\tau = \tau_i$ (and corresponding changes to the constants that depend on the initial conditions, ie. $\sigma_c$, $\sigma_s$ and $\rho$). Because the pulses do not instantaneously change the position of the ions (and therefore the modes), we can consider the initial condition of each pulse application to be $x_i = 0$\footnote{This is in the same way that we consider the initial velocity for each pulse to be $v_i$, not $v(\tau_i - \delta) + v_i$ (where $v(\tau_i - \delta)$ is the velocity of the mode instantaneously before the application of the pulse). Hence, we do not need to account for the position instantaneously before the application of the pulse}. That is, we can consider the application of each pulse as a new, independent trajectory with initial conditions as the instantaneous motional changes it enforces. Thus,  the motion after pulse $i$ (disregarding evolution due to previous and subsequent pulses) will be given by:
+\begin{align}
+	\begin{split}
+v_p (\tau) & = \frac{2 \beta}{\rho_i \beta_p} v_i \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_i) \right) (\sigma_{c,i} f_c (\tau - \tau_i) + \sigma_{s,i} f_s (\tau - \tau_i)) \\
+&+ \frac{2 \beta}{\rho \beta_p} v_i \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_i) \right) (\sigma_{c,i} f_s (\tau - \tau_i) - \sigma_{s,i} f_c (\tau - \tau_i))
+\end{split} \label{eq:phoebe2}
+\end{align}
+where the constants $\sigma_{c,i}$, $\sigma_{s,i}$ and $\rho_i$ are now specific to the time $\tau_i$. Because the motion is linear, we can simply add the trajectories for all the pulses (treated individually) together. This gives the full motion as:
+\begin{align}
+\begin{split}
+v_p (\tau) &= \sum_{i=0}^n \frac{2 \beta}{\rho_i \beta_p} v_i \sin \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_i) \right) (\sigma_{c,i} f_c (\tau - \tau_i) + \sigma_{s,i} f_s (\tau - \tau_i)) \\
+&+ \sum_{i = 0}^n \frac{2 \beta}{\rho_i \beta_p} v_i \cos \left( 2 \pi \frac{\beta_p}{\beta} (\tau - \tau_i) \right) (\sigma_{c,i} f_s (\tau - \tau_i) - \sigma_{s,i} f_c (\tau - \tau_i))
 \end{split}
 \end{align}
-
 
 
 
